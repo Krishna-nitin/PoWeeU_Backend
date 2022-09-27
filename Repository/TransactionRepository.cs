@@ -22,5 +22,10 @@ namespace PoWeeU_Backend.Repository
         {
             return _dbcontext1.transactions;
         }
+
+        public IEnumerable<TransactionEntity> Get_TransactionsbyProviderEmail(string mail)
+        {
+            return _dbcontext1.transactions.Where(s => s.Transaction_Provider_Email == mail);
+        }
     }
 }

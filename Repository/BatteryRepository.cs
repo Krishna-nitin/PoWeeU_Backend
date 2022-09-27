@@ -34,5 +34,24 @@ namespace PoWeeU_Backend.Repository
             _dbcontext1.SaveChanges();
             return btr;
         }
+
+        public IEnumerable<BatteryEntity> Get_batteryByProviderEmail(string mail)
+        {
+            return _dbcontext1.batteries.Where(s => s.Battery_Provider_Email == mail);
+        }
+
+        public IEnumerable<string> Get_allBatteryBrands()
+        {
+            List<string> intermediate = new List<string>();
+            foreach(var i in _dbcontext1.batteries)
+            {
+                intermediate.Add(i.Battery_Brand);
+            }
+            var result = intermediate.Distinct();
+            return result;
+        }
+
+        //public IEnumerable<BatteryEntity> Get_BatteriesByBrand(str)
+             
     }
 }

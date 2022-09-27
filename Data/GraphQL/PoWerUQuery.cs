@@ -156,6 +156,33 @@ namespace PoWeeU_Backend.Data.GraphQL
                 }
             );
 
+            Field<ListGraphType<BatteryType>>(
+               "get_batteriesByProviderEmail",
+               arguments: new QueryArguments(new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "email" }),
+               resolve: context =>
+               {
+                   var email = context.GetArgument<string>("email");
+                   return btrrepo.Get_batteryByProviderEmail(email);
+               }
+           );
+
+            Field<ListGraphType<TransactionType>>(
+               "get_transactionsByProviderEmail",
+               arguments: new QueryArguments(new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "email" }),
+               resolve: context =>
+               {
+                   var email = context.GetArgument<string>("email");
+                   return tranrepo.Get_TransactionsbyProviderEmail(email);
+               }
+           );
+
+            Field<ListGraphType<StringGraphType>>(
+              "Get_allBatteryBrands",
+              resolve: context =>
+              {
+                  return btrrepo.Get_allBatteryBrands();
+              }
+          );
 
 
         }

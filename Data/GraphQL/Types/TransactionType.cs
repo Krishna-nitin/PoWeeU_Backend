@@ -19,6 +19,7 @@ namespace PoWeeU_Backend.Data.GraphQL.Types
             Field(t => t.Transaction_Date);
             Field(t => t.Transaction_Battery_Id);
             Field(t => t.Transaction_Cust_Email);
+            Field(t => t.Transaction_Provider_Email);
         }
     }
 }

@@ -16,5 +16,6 @@ namespace PoWeeU_Backend.Data.Entity
         public DateTime Transaction_Date { get; set; }
         public string Transaction_Battery_Id { get; set; }
         public string Transaction_Cust_Email { get; set; }
+        public string Transaction_Provider_Email { get; set; }
     }
 }
