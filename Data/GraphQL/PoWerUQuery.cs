@@ -184,6 +184,67 @@ namespace PoWeeU_Backend.Data.GraphQL
               }
           );
 
+            Field<ListGraphType<BatteryType>>(
+               "get_BatteriesbyBrand",
+               arguments: new QueryArguments(new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "brand" }),
+               resolve: context =>
+               {
+                   var brand = context.GetArgument<string>("brand");
+                   return btrrepo.Get_BatteriesByBrand(brand);
+               }
+           );
+
+            Field<ListGraphType<IntGraphType>>(
+              "Get_allBatteryCapacities",
+              resolve: context =>
+              {
+                  return btrrepo.Get_allBatteryCapacities();
+              }
+          );
+
+            Field<ListGraphType<BatteryType>>(
+               "get_BatteriesbyCapacity",
+               arguments: new QueryArguments(new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "capacity" }),
+               resolve: context =>
+               {
+                   int capacity = context.GetArgument<int>("capacity");
+                   return btrrepo.Get_BatteriesBycapacity(capacity);
+               }
+           );
+
+            Field<ListGraphType<BatteryType>>(
+              "get_Batteriesby_BrandCapacity",
+              arguments: new QueryArguments(new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "brand" },
+                                            new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "capacity" }),
+              resolve: context =>
+              {
+                  int capacity = context.GetArgument<int>("capacity");
+                  var brand = context.GetArgument<String>("brand");
+                  return btrrepo.Get_BatteriesBy_Brandcapacity(brand,capacity);
+              }
+          );
+
+
+            Field<IntGraphType>(
+                 "get_BatteryCountById",
+                 arguments: new QueryArguments(new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "id" }),
+                 resolve: context =>
+                 {         
+                     var id = context.GetArgument<String>("id");
+                     return btrrepo.get_BatteryCountById(id);
+                 }
+             );
+
+            Field<BatteryType>(
+                 "get_BatterybyId",
+                 arguments: new QueryArguments(new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "id" }),
+                 resolve: context =>
+                 {
+                     var id = context.GetArgument<String>("id");
+                     return btrrepo.get_BatterybyId(id);
+                 }
+             );
+
 
         }
     }

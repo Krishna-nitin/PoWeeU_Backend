@@ -51,7 +51,50 @@ namespace PoWeeU_Backend.Repository
             return result;
         }
 
-        //public IEnumerable<BatteryEntity> Get_BatteriesByBrand(str)
-             
+        public IEnumerable<BatteryEntity> Get_BatteriesByBrand(string brand)
+        {
+            return _dbcontext1.batteries.Where(s => s.Battery_Brand == brand);
+        }
+
+        public IEnumerable<int> Get_allBatteryCapacities()
+        {
+            List<int> intermediate = new List<int>();
+            foreach (var i in _dbcontext1.batteries)
+            {
+                intermediate.Add(i.Battery_Capacity);
+            }
+            var result = intermediate.Distinct();
+            return result;
+        }
+
+        public IEnumerable<BatteryEntity> Get_BatteriesBycapacity(int cap)
+        {
+            return _dbcontext1.batteries.Where(s => s.Battery_Capacity == cap);
+        }
+
+        public IEnumerable<BatteryEntity> Get_BatteriesBy_Brandcapacity(string brand,int cap)
+        {
+            return _dbcontext1.batteries.Where(s => s.Battery_Capacity == cap && s.Battery_Brand==brand);
+        }
+
+        public int get_BatteryCountById(string Id)
+        {
+            return _dbcontext1.batteries.First(s => s.Battery_Id == Id).Battery_Count;
+        }
+
+        public BatteryEntity get_BatterybyId(string Id)
+        {
+            return _dbcontext1.batteries.First(s => s.Battery_Id == Id);
+        }
+
+        public BatteryEntity Decrement_Count(string Id)
+        {
+            var cnt =_dbcontext1.batteries.First(s => s.Battery_Id == Id).Battery_Count;
+            cnt = cnt - 1;
+            _dbcontext1.batteries.First(s => s.Battery_Id == Id).Battery_Count = cnt;
+            _dbcontext1.SaveChanges();
+            return _dbcontext1.batteries.First(s => s.Battery_Id == Id);
+        }
+
     }
 }
