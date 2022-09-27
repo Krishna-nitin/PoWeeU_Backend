@@ -96,5 +96,18 @@ namespace PoWeeU_Backend.Repository
             return _dbcontext1.batteries.First(s => s.Battery_Id == Id);
         }
 
+        public bool verify_status(string brand, int cap)
+        {
+            return _dbcontext1.batteries.Any(s => s.Battery_Brand == brand && s.Battery_Charge_status == 0 && s.Battery_Capacity==cap);
+        }
+
+        public BatteryEntity Increment_Count(string Id)
+        {
+            var cnt = _dbcontext1.batteries.First(s => s.Battery_Id == Id).Battery_Count;
+            cnt = cnt + 1;
+            _dbcontext1.batteries.First(s => s.Battery_Id == Id).Battery_Count = cnt;
+            _dbcontext1.SaveChanges();
+            return _dbcontext1.batteries.First(s => s.Battery_Id == Id);
+        }
     }
 }

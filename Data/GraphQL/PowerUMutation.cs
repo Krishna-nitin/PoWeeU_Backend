@@ -64,6 +64,16 @@ namespace PoWeeU_Backend.Data.GraphQL
                     return trnrepo.Add_Transaction(transaction);
                 }
             );
+
+            Field<BatteryType>(
+               "Increment_BatteryCount",
+               arguments: new QueryArguments(new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "id" }),
+               resolve: context =>
+               {
+                   var id = context.GetArgument<string>("id");
+                   return btrrepo.Increment_Count(id);
+               }
+           );
         }
     }
 }

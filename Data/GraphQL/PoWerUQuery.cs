@@ -245,6 +245,18 @@ namespace PoWeeU_Backend.Data.GraphQL
                  }
              );
 
+            Field<BooleanGraphType>(
+               "verify_BatterystatusByBrandCapacity",
+               arguments: new QueryArguments(new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "brand" },
+                                             new QueryArgument<NonNullGraphType<IntGraphType>> { Name = "cap" }),
+               resolve: context =>
+               {
+                   var brand = context.GetArgument<string>("brand");
+                   var cap = context.GetArgument<int>("cap");
+                   return btrrepo.verify_status(brand,cap);
+               }
+           );
+
 
         }
     }
