@@ -109,5 +109,11 @@ namespace PoWeeU_Backend.Repository
             _dbcontext1.SaveChanges();
             return _dbcontext1.batteries.First(s => s.Battery_Id == Id);
         }
+
+        public void DeleteBattery(string id)
+        {
+            _dbcontext1.batteries.Remove(_dbcontext1.batteries.First(s => s.Battery_Id == id));
+            _dbcontext1.SaveChanges();
+        }
     }
 }

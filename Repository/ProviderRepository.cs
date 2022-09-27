@@ -43,5 +43,11 @@ namespace PoWeeU_Backend.Repository
         {
             return _dbcontext1.providers;
         }
+
+        public void DeleteProvider(string email)
+        {
+            _dbcontext1.providers.Remove(_dbcontext1.providers.First(s => s.Provider_Email == email));
+            _dbcontext1.SaveChanges();   
+        }
     }
 }

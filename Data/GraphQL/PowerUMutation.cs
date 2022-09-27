@@ -74,6 +74,28 @@ namespace PoWeeU_Backend.Data.GraphQL
                    return btrrepo.Increment_Count(id);
                }
            );
+
+            Field<IntGraphType>(
+                "Remove_provider",
+                arguments: new QueryArguments(new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "email" }),
+                resolve: context =>
+               {
+                   var email = context.GetArgument<string>("email");
+                   pdrepo.DeleteProvider(email);
+                   return 1;
+               }
+                );
+
+            Field<IntGraphType>(
+               "Remove_Battery",
+               arguments: new QueryArguments(new QueryArgument<NonNullGraphType<StringGraphType>> { Name = "id" }),
+               resolve: context =>
+               {
+                   var id = context.GetArgument<string>("id");
+                   btrrepo.DeleteBattery(id);
+                   return 1;
+               }
+               );
         }
     }
 }
