@@ -13,7 +13,7 @@ namespace PoWeeU_Backend.Data.GraphQL
 {
     public class PowerUMutation : ObjectGraphType
     {
-        public PowerUMutation(ProviderRepository pdrepo,CustomerRepository custrepo,BatteryRepository btrrepo)
+        public PowerUMutation(ProviderRepository pdrepo,CustomerRepository custrepo,BatteryRepository btrrepo,TransactionRepository trnrepo)
         {
             Field<ProviderType>(
                 "Add_provider",
@@ -54,6 +54,16 @@ namespace PoWeeU_Backend.Data.GraphQL
                    return btrrepo.Decrement_Count(id);
                }
            );
+
+            Field<TransactionType>(
+                "Add_Transaction",
+                arguments: new QueryArguments(new QueryArgument<NonNullGraphType<TransactionInputType>> { Name = "transaction" }),
+                resolve: context =>
+                {
+                    var transaction = context.GetArgument<TransactionEntity>("transaction");
+                    return trnrepo.Add_Transaction(transaction);
+                }
+            );
         }
     }
 }

@@ -27,5 +27,13 @@ namespace PoWeeU_Backend.Repository
         {
             return _dbcontext1.transactions.Where(s => s.Transaction_Provider_Email == mail);
         }
+
+        public TransactionEntity Add_Transaction(TransactionEntity transaction)
+        {
+            _dbcontext1.transactions.Add(transaction);
+            _dbcontext1.SaveChanges();
+            return transaction;
+        }
+
     }
 }
