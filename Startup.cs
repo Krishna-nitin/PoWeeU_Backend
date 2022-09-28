@@ -64,6 +64,9 @@ namespace PoWeeU_Backend
                 endpoints.MapControllers();
             });
 
+            app.UseCors(builder =>
+            builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+
             app.UseGraphQL<PoWerUSchema>();
             app.UseGraphQLPlayground();
         }
